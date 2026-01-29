@@ -123,7 +123,7 @@ let brainrots = [
 
 function getBrainrots(thing) {
   thing.forEach((element) => {
-    console.log(element.name, element.rarity, element.worth);
+    console.log(element.name, ",", element.rarity, ",", element.worth);
   });
 }
 

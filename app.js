@@ -4,42 +4,37 @@ let brainrots = [
   {
     name: "Tung Tung Tung Sahur",
     rarity: "Legendary",
-    worth: 100000000,
-    chance: 2,
+    worth: 1000000,
+    chance: 1,
   },
-  { name: "Tralalero Tralala", rarity: "Epic", worth: 100000, chance: 2.5 },
-  { name: "Bombardiro Crocodilo", rarity: "Common", worth: 100, chance: 10 },
-  { name: "Spaghetti Spaghetto", rarity: "Rare", worth: 5000, chance: 4.1667 },
-  { name: "Mamma Mia Mammuth", rarity: "Epic", worth: 250000, chance: 2.5 },
-  { name: "Pizzarino Pepperoni", rarity: "Common", worth: 250, chance: 10 },
-  { name: "Luigi Linguini", rarity: "Rare", worth: 4200, chance: 4.1667 },
-  { name: "Ravioli Raptor", rarity: "Epic", worth: 180000, chance: 2.5 },
-  { name: "Gnocchi Goblino", rarity: "Uncommon", worth: 1200, chance: 5 },
-  { name: "Mozzarella Mafia", rarity: "Legendary", worth: 75000000, chance: 2 },
-  { name: "Carbonara Cannon", rarity: "Rare", worth: 8000, chance: 4.1667 },
-  { name: "Vespa Vespino", rarity: "Common", worth: 180, chance: 10 },
-  { name: "Gelato Gigante", rarity: "Epic", worth: 210000, chance: 2.5 },
-  { name: "Panini Bandito", rarity: "Uncommon", worth: 950, chance: 5 },
-  { name: "Bolognese Berserker", rarity: "Rare", worth: 11000, chance: 4.1667 },
-  { name: "Nonna Nuclear", rarity: "Legendary", worth: 99999999, chance: 2 },
-  { name: "Espresso Depresso", rarity: "Uncommon", worth: 666, chance: 5 },
-  { name: "Fettuccine Phantom", rarity: "Epic", worth: 300000, chance: 2.5 },
-  { name: "Calzone Colosso", rarity: "Rare", worth: 9000, chance: 4.1667 },
-  { name: "Tiramisu Tsunami", rarity: "Legendary", worth: 50000000, chance: 2 },
-  {
-    name: "Prosciutto Poltergeist",
-    rarity: "Epic",
-    worth: 275000,
-    chance: 2.5,
-  },
-  { name: "Pesto Possessed", rarity: "Uncommon", worth: 1300, chance: 5 },
+  { name: "Tralalero Tralala", rarity: "Epic", worth: 100000, chance: 7 },
+  { name: "Bombardiro Crocodilo", rarity: "Common", worth: 10000, chance: 35 },
+  { name: "Spaghetti Spaghetto", rarity: "Rare", worth: 30000, chance: 15 },
+  { name: "Mamma Mia Mammuth", rarity: "Epic", worth: 250000, chance: 7 },
+  { name: "Pizzarino Pepperoni", rarity: "Common", worth: 250, chance: 35 },
+  { name: "Luigi Linguini", rarity: "Rare", worth: 20000, chance: 15 },
+  { name: "Ravioli Raptor", rarity: "Epic", worth: 180000, chance: 7 },
+  { name: "Gnocchi Goblino", rarity: "Uncommon", worth: 1200, chance: 25 },
+  { name: "Mozzarella Mafia", rarity: "Legendary", worth: -500000, chance: 1 },
+  { name: "Carbonara Cannon", rarity: "Rare", worth: 8000, chance: 15 },
+  { name: "Vespa Vespino", rarity: "Common", worth: 18000, chance: 35 },
+  { name: "Gelato Gigante", rarity: "Epic", worth: 210000, chance: 7 },
+  { name: "Panini Bandito", rarity: "Uncommon", worth: 9500, chance: 25 },
+  { name: "Bolognese Berserker", rarity: "Rare", worth: 11000, chance: 15 },
+  { name: "Nonna Nuclear", rarity: "Legendary", worth: 9999999, chance: 0.25 },
+  { name: "Espresso Depresso", rarity: "Uncommon", worth: 666, chance: 25 },
+  { name: "Fettuccine Phantom", rarity: "Epic", worth: 300000, chance: 7 },
+  { name: "Calzone Colosso", rarity: "Rare", worth: 9000, chance: 15 },
+  { name: "Tiramisu Tsunami", rarity: "Legendary", worth: 500000, chance: 1 },
+  { name: "Prosciutto Poltergeist", rarity: "Epic", worth: 275000, chance: 7 },
+  { name: "Pesto Possessed", rarity: "Uncommon", worth: 13000, chance: 25 },
   {
     name: "Lasagna Leviathan",
     rarity: "Legendary",
     worth: 88000000,
-    chance: 2,
+    chance: 1,
   },
-  { name: "Mario Mozzarello", rarity: "Rare", worth: 7000, chance: 4.1667 },
+  { name: "Mario Mozzarello", rarity: "Rare", worth: 7000, chance: 15 },
 ];
 
 const readline = require("readline");
@@ -55,31 +50,50 @@ function getRandomNumber(minimum, maximum) {
 }
 
 function getBrainrot() {
-  rl.question(`Roll Brainrot? Yes or No ${starterPlayerMoney} `, (response) => {
-    if (response === "Yes" || " yes") {
-      let totalChance = 0;
-      for (const brainrot of brainrots) {
-        totalChance += brainrot.chance;
-      }
-      const roll = getRandomNumber(1, totalChance);
+  if (cash < 100000) {
+    console.log("You Don't Have Enough Money");
+    rl.close();
+    return;
+  }
 
-      let current = 0;
-
-      for (const brainrot of brainrots) {
-        current += symbol.chance;
-
-        if (roll <= current) {
-          console.log(brainrot.name);
-          console.log("Roll:", roll);
-          cash += brainrot.value;
-          break;
+  rl.question(
+    `Roll Brainrot for $100000? Y/N, Money: $${cash} `,
+    (response) => {
+      if (response.toLowerCase() === "y") {
+        if (cash < 100000) {
+          console.log("You Don't Have Enough Money");
+          rl.close();
+          return;
         }
+
+        cash -= 100000;
+        let totalChance = 0;
+        for (let i = 0; i < brainrots.length; i++) {
+          totalChance += brainrots[i].chance;
+        }
+
+        const roll = getRandomNumber(1, totalChance);
+        let current = 0;
+
+        for (let i = 0; i < brainrots.length; i++) {
+          current += brainrots[i].chance;
+          if (roll <= current) {
+            console.log(
+              `${brainrots[i].name}, ${brainrots[i].rarity}, Value: ${brainrots[i].worth},`,
+            );
+            cash += brainrots[i].worth;
+            break;
+          }
+        }
+        console.log("Money:", cash);
+        getBrainrot();
       }
-      console.log("Money:", cash);
-      getBrainrot();
-    } else {
-      rl.close();
-    }
-  });
+      if (response.toLowerCase() === "n") {
+        rl.close();
+      } else {
+        getBrainrot();
+      }
+    },
+  );
 }
 getBrainrot();

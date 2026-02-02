@@ -1,3 +1,5 @@
+let cash = 1000000;
+
 let brainrots = [
   {
     name: "Tung Tung Tung Sahur",
@@ -40,18 +42,16 @@ let brainrots = [
   { name: "Mario Mozzarello", rarity: "Rare", worth: 7000, chance: 4.1667 },
 ];
 
-function getRandomNumber(minimum, maximum) {
-  min = Math.ceil(minimum);
-  max = Math.floor(maximum);
+function getRandomBrainrot(brainrots) {
+  if (cash < 100000) {
+    console.log("Not enough cash to spin!");
+    return;
+  }
+  cash -= 100000;
 
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  let totalChance = 0;
+  for (let i = 0; i < brainrots.length; i++) {
+    totalChance += brainrots[i].chance;
+    let random = Math.random() * totalChance;
+  }
 }
-
-function getBrainrots(thing) {
-  thing.forEach((element) => {
-    console.log(element.name, ",", element.rarity, ",", element.worth);
-  });
-}
-
-getBrainrots(brainrots);
-getRandomNumber();

@@ -42,18 +42,44 @@ let brainrots = [
   { name: "Mario Mozzarello", rarity: "Rare", worth: 7000, chance: 4.1667 },
 ];
 
-function getRandomBrainrot(brainrots) {
-  for (let i = 1000000; i > 100000; i -= 100000)
-    if (i < 100000) {
-      console.log("Not enough cash to spin!");
-      return;
-    }
+const readline = require("readline");
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
-  let totalChance = 0;
-  for (let i = 0; i < brainrots.length; i++) {
-    totalChance += brainrots[i].chance;
-    let random = Math.random() * totalChance;
-  }
+function getRandomNumber(minimum, maximum) {
+  min = Math.ceil(minimum);
+  max = Math.floor(maximum);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-getRandomBrainrot(brainrots);
+function getBrainrot() {
+  rl.question(`Roll Brainrot? Yes or No ${starterPlayerMoney} `, (response) => {
+    if (response === "Yes" || " yes") {
+      let totalChance = 0;
+      for (const brainrot of brainrots) {
+        totalChance += brainrot.chance;
+      }
+      const roll = getRandomNumber(1, totalChance);
+
+      let current = 0;
+
+      for (const brainrot of brainrots) {
+        current += symbol.chance;
+
+        if (roll <= current) {
+          console.log(brainrot.name);
+          console.log("Roll:", roll);
+          cash += brainrot.value;
+          break;
+        }
+      }
+      console.log("Money:", cash);
+      getBrainrot();
+    } else {
+      rl.close();
+    }
+  });
+}
+getBrainrot();

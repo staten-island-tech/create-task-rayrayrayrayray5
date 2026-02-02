@@ -43,11 +43,11 @@ let brainrots = [
 ];
 
 function getRandomBrainrot(brainrots) {
-  if (cash < 100000) {
-    console.log("Not enough cash to spin!");
-    return;
-  }
-  cash -= 100000;
+  for (let i = 1000000; i > 100000; i -= 100000)
+    if (i < 100000) {
+      console.log("Not enough cash to spin!");
+      return;
+    }
 
   let totalChance = 0;
   for (let i = 0; i < brainrots.length; i++) {
@@ -55,3 +55,5 @@ function getRandomBrainrot(brainrots) {
     let random = Math.random() * totalChance;
   }
 }
+
+getRandomBrainrot(brainrots);

@@ -1,5 +1,4 @@
 let cash = 1000000;
-
 let brainrots = [
   {
     name: "Tung Tung Tung Sahur",
@@ -97,3 +96,8 @@ function getBrainrot() {
   );
 }
 getBrainrot();
+
+//use "node app.js" in terminal
+//to start rolling, type "y" in the terminal
+//to continue rolling, type "y", to stop, type "n"
+//if cash is under 100000, the game ends

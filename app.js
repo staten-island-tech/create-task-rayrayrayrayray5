@@ -1,4 +1,5 @@
 let cash = 1000000;
+let cost = 100000;
 let brainrots = [
   {
     name: "Tung Tung Tung Sahur",
@@ -48,8 +49,8 @@ function getRandomNumber(minimum, maximum) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getBrainrot() {
-  if (cash < 100000) {
+function getBrainrot(cost) {
+  if (cash < cost) {
     console.log("You Don't Have Enough Money");
     rl.close();
     return;
@@ -59,13 +60,13 @@ function getBrainrot() {
     `Roll Brainrot for $100000? Y/N, Money: $${cash} `,
     (response) => {
       if (response.toLowerCase() === "y") {
-        if (cash < 100000) {
+        if (cash < cost) {
           console.log("You Don't Have Enough Money");
           rl.close();
           return;
         }
 
-        cash -= 100000;
+        cash -= cost;
         let totalChance = 0;
         for (let i = 0; i < brainrots.length; i++) {
           totalChance += brainrots[i].chance;
@@ -85,17 +86,17 @@ function getBrainrot() {
           }
         }
         console.log("Money:", cash);
-        getBrainrot();
+        getBrainrot(cost);
       }
       if (response.toLowerCase() === "n") {
         rl.close();
       } else {
-        getBrainrot();
+        getBrainrot(cost);
       }
     },
   );
 }
-getBrainrot();
+getBrainrot(cost);
 
 //use "node app.js" in terminal
 //to start rolling, type "y" in the terminal

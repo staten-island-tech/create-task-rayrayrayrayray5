@@ -97,8 +97,3 @@ function getBrainrot(cost) {
   );
 }
 getBrainrot(cost);
-
-//use "node app.js" in terminal
-//to start rolling, type "y" in the terminal
-//to continue rolling, type "y", to stop, type "n"
-//if cash is under 100000, the game ends

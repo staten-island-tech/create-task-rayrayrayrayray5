@@ -49,7 +49,7 @@ function getRandomNumber(minimum, maximum) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function getBrainrot(cost) {
+function getBrainrot(cash, cost) {
   if (cash < cost) {
     console.log("You Don't Have Enough Money");
     rl.close();
@@ -86,14 +86,14 @@ function getBrainrot(cost) {
           }
         }
         console.log("Money:", cash);
-        getBrainrot(cost);
+        getBrainrot(cash, cost);
       }
       if (response.toLowerCase() === "n") {
         rl.close();
       } else {
-        getBrainrot(cost);
+        getBrainrot(cash, cost);
       }
     },
   );
 }
-getBrainrot(cost);
+getBrainrot(cash, cost);
